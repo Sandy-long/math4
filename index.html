@@ -41,18 +41,57 @@
             margin-bottom: 25px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
+        /* 问题颜色改为红色 */
         .question {
             font-weight: bold;
-            color: #e74c3c;
-            margin-top: 12px;
+            color: #e74c3c; /* 红色 */
+            margin: 15px 0 5px 0;
             font-size: 0.95em;
+            cursor: pointer; /* 添加指针样式 */
+        }
+        /* 答案区域样式 */
+        .answer-container {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+            padding: 5px 15px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .answer-container:hover {
+            background: linear-gradient(135deg, #dcffe4 0%, #c6f6d5 100%);
+            transform: translateX(5px);
+        }
+        .answer-prompt {
+            color: #10b981;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .answer-prompt:before {
+            content: "✨";
+            margin-right: 10px;
+            font-size: 1.2em;
         }
         .answer {
             color: #27ae60;
-            margin-bottom: 12px;
-            padding-left: 15px;
-            border-left: 2px solid #2ecc71;
-            font-size: 0.95em;
+            margin-left: 20px;
+            padding: 10px 15px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid #10b981;
+            border-radius: 0 8px 8px 0;
+            display: none;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+        .show-answer .answer {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .rule {
             background-color: #f1f9fe;
@@ -349,41 +388,17 @@
         /* 通用样式 */
         .question {
             font-weight: bold;
-            color: #2c3e50;
+            color: #e74c3c;
             margin: 15px 0 5px 0;
             padding: 8px 12px;
             background-color: #f8f9fa;
             border-left: 3px solid #3498db;
             font-size: 1em;
+            cursor: pointer;
         }
-
-        .answer {
-            color: #27ae60;
-            margin: 0 0 20px 20px;
-            padding: 8px 12px;
-            background-color: #f1f9fe;
-            border-radius: 4px;
-            font-size: 0.95em;
-        }
-
-        /* 示例区域样式优化 */
-        .example {
-            background-color: #f8f9fa;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 15px 0;
-            border: 1px solid #e0e0e0;
-        }
-
-        /* 规则样式优化 */
-        .rule {
-            background-color: #f1f9fe;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 12px 0;
-            border-left: 4px solid #3498db;
-            font-size: 0.95em;
-            line-height: 1.6;
+        /* 答案区域样式优化 */
+        .answer-container {
+            margin: 5px 0 15px 20px;
         }
     </style>
 </head>
@@ -393,7 +408,6 @@
     <div class="section">
         <h2>移动凑倍</h2>
         
-        <!-- 移动凑倍动画 -->
         <div class="move-animation-container">
             <div class="person person-a">
                 A
@@ -414,13 +428,22 @@
         
         <div class="example">
             <div class="question">若小明给小华5元后两人钱数相同，原来小明比小华多多少元？</div>
-            <div class="answer">10元</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">10元</div>
+            </div>
             
             <div class="question">果果给乐乐3颗糖后，两人糖数相等。原果果比乐乐多多少颗？</div>
-            <div class="answer">6颗</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">6颗</div>
+            </div>
             
             <div class="question">球球给丫丫4个玩具后，两人数一样多。原来球球多几个？</div>
-            <div class="answer">8个</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">8个</div>
+            </div>
         </div>
 
         <h3>2. 差值计算</h3>
@@ -433,20 +456,28 @@
         
         <div class="example">
             <div class="question">高高原来比思思多10辆车，送5辆后一样多。高高原有几辆？</div>
-            <div class="answer">思思有15辆，高高有25辆</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">思思有15辆，高高有25辆</div>
+            </div>
             
             <div class="question">乐乐比果果多16块积木，给果果8块后一样多。乐乐原有几块？</div>
-            <div class="answer">果果12块，乐乐28块</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">果果12块，乐乐28块</div>
+            </div>
             
             <div class="question">若东东比西西多24支铅笔，东东给西西若干支后，西西反而比东东多2支。问东东给了多少支？</div>
-            <div class="answer">13支</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">13支</div>
+            </div>
         </div>
     </div>
     
     <div class="section">
         <h2>数规则图形</h2>
         
-        <!-- 数规则图形动画 -->
         <div class="grid-animation-container">
             <div class="grid">
                 <div class="grid-item grid-highlight" style="animation-delay: 0s;"></div>
@@ -487,17 +518,25 @@
         
         <div class="example">
             <div class="question">一个 5×5 棋盘上放置棋子，共有多少颗？</div>
-            <div class="answer">25颗。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">25颗</div>
+            </div>
             
             <div class="question">一个 4×4 的点阵中，可以组成多少个单位正方形？</div>
-            <div class="answer">9个。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">9个</div>
+            </div>
             
             <div class="question">在8×6的点阵中：
-
 （1）有多少个单位正方形？
 （2）有多少个2×2的正方形？
 （3）若用这些点组成三角形，最多能组成多少个不重叠的三角形？</div>
-            <div class="answer">35个，24个，70个</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">35个，24个，70个</div>
+            </div>
         </div>
         
         <h3>2. 算式验证</h3>
@@ -510,17 +549,35 @@
         
         <div class="example">
             <div class="question">判断算式是否正确：1+2+3+4+3+2+1=16</div>
-            <div class="answer">正确</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">正确</div>
+            </div>
             
             <div class="question">若三角形第1层有2颗星星，每层比上层多1颗，第10层有多少颗？</div>
-            <div class="answer">11颗</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">11颗</div>
+            </div>
             
             <div class="question">正方形从1个边长逐渐加大，每次加边，增加几个格子？（边长为n时，总数为 n²）若边长5，总格子数是多少？</div>
-            <div class="answer">25个</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">25个</div>
+            </div>
         </div>
     </div>
     
-   
-    </div>
+    <script>
+        // 修复点击功能：点击答案区域显示/隐藏答案
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.answer-container');
+            containers.forEach(container => {
+                container.addEventListener('click', function() {
+                    this.classList.toggle('show-answer');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
